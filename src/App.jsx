@@ -1,11 +1,23 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Context from './hooks/Context';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import GamesListPage from './pages/GamesListPage';
+import FavoriteGamesPage from './pages/FavoriteGamesPage';
 
 const App = () => {
   return (
-    <div className="bg-primary bg-hero bg-no-repeat bg-cover">
-      <h1 className="text-base text-background font-regular">First test line</h1>
-      <h1 className="text-xl text-light font-bold">Second test line</h1>
-    </div>
+    <Context>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="games-list" element={<GamesListPage />} />
+          <Route path="favorite" element={<FavoriteGamesPage />} />
+          <Route path="*" element={<HomePage />} />
+        </Route>
+      </Routes>
+    </Context>
   );
 };
 
