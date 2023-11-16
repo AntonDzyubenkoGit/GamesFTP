@@ -11,7 +11,7 @@ const Header = () => {
       className="
         bg-background-hf text-primary text-sm 
         font-regular sticky top-0 lg:text-base
-        border-b-[10px] border-primary"
+        border-b-[10px] border-primary z-50"
     >
       <a
         className="absolute max-lg:hidden lg:top-1 lg:left-1 "

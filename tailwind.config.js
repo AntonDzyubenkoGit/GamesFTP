@@ -29,7 +29,8 @@ export default {
         button: '0px 4px 4px #505050',
       },
       backgroundImage: {
-        hero: 'url("assets/images/heroBg.png")',
+        hero: 'url("assets/images/aboutBg.png")',
+        controller: 'url("assets/images/controller.svg")',
       },
     },
   },

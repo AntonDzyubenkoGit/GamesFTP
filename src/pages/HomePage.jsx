@@ -1,7 +1,14 @@
 import React from 'react';
+import AdoutProject from '../components/AdoutProject';
+import Decor from '../components/Decor';
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <AdoutProject />
+      <Decor />
+    </div>
+  );
 };
 
 export default HomePage;
