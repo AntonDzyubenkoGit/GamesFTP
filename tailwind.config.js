@@ -21,7 +21,8 @@ export default {
       colors: {
         primary: '#505050',
         light: '#F0F0F0',
-        background: '#F1EEF9',
+        background: '#E5DBFF',
+        'background-hf': '#DEDEDE',
       },
       boxShadow: {
         card: '2px 4px 4px #505050',

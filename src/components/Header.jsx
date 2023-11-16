@@ -7,7 +7,11 @@ const Header = () => {
   const { count = 0 } = useContext(AppContext);
 
   return (
-    <header className="bg-background text-primary text-sm font-regular sticky top-0 lg:text-base">
+    <header
+      className="
+        bg-background-hf text-primary text-sm 
+        font-regular sticky top-0 lg:text-base"
+    >
       <a
         className="absolute max-lg:hidden lg:top-1 lg:left-1 "
         href="https://t.me/DVAnton"
@@ -17,7 +21,11 @@ const Header = () => {
         <img className="w-[32px] h-[32px]" src={telegram} alt="telegram icon" />
         <span className="text-xs absolute w-max">Для связи</span>
       </a>
-      <nav className="max-container mx-auto flex items-center justify-between py-4 px-4 md:justify-center md:gap-[250px]">
+      <nav
+        className="
+          max-container mx-auto flex items-center justify-between 
+          py-4 px-2 md:justify-center md:gap-[250px]"
+      >
         <NavLink
           to="/games-list"
           className={({ isActive }) =>
@@ -36,7 +44,11 @@ const Header = () => {
           }
         >
           Избранное
-          <div className="bg-primary ml-1 rounded-full w-[15px] h-[15px] flex items-center justify-center">
+          <div
+            className="
+              bg-primary ml-1 rounded-full w-[15px] h-[15px] 
+              flex items-center justify-center"
+          >
             <span className="text-[8px] text-light">{count}</span>
           </div>
         </NavLink>
