@@ -1,4 +1,4 @@
-# Scissors-Colors (React + Vite)
+# Games FTP
 
 Разработка react-приложения "GamesFTP"
 

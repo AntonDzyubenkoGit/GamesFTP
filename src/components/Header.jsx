@@ -1,12 +1,22 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AppContext } from '../hooks/Context';
+import { logo, telegram } from '../assets';
 
 const Header = () => {
   const { count = 0 } = useContext(AppContext);
 
   return (
     <header className="bg-background text-primary text-sm font-regular sticky top-0 lg:text-base">
+      <a
+        className="absolute max-lg:hidden lg:top-1 lg:left-1 "
+        href="https://t.me/DVAnton"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img className="w-[32px] h-[32px]" src={telegram} alt="telegram icon" />
+        <span className="text-xs absolute w-max">Для связи</span>
+      </a>
       <nav className="max-container mx-auto flex items-center justify-between py-4 px-4 md:justify-center md:gap-[250px]">
         <NavLink
           to="/games-list"
@@ -17,11 +27,7 @@ const Header = () => {
           Список игр
         </NavLink>
         <Link to="/" className="order-1 lg:order-2">
-          <img
-            src="/src/assets/logo.svg"
-            alt="logo"
-            className="w-[90px] h-[90px] lg:w-[110px] lg:h-[110px]"
-          />
+          <img src={logo} alt="logo" className="w-[90px] h-[90px] lg:w-[110px] lg:h-[110px]" />
         </Link>
         <NavLink
           to="/favorite"
