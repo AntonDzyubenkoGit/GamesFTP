@@ -10,7 +10,8 @@ const Header = () => {
     <header
       className="
         bg-background-hf text-primary text-sm 
-        font-regular sticky top-0 lg:text-base"
+        font-regular sticky top-0 lg:text-base
+        border-b-[10px] border-primary"
     >
       <a
         className="absolute max-lg:hidden lg:top-1 lg:left-1 "
@@ -40,7 +41,7 @@ const Header = () => {
         <NavLink
           to="/favorite"
           className={({ isActive }) =>
-            isActive ? 'font-bold underline flex items-center order-3' : 'flex items-center order-3'
+            (isActive ? 'font-bold underline' : '') + ' ' + 'flex items-center order-3'
           }
         >
           Избранное
