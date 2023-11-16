@@ -33,13 +33,16 @@ const AdoutProject = () => {
         {aboutItems.map((item, index) => {
           if (index === 1 || index === 2) {
             return (
-              <li key={item.id} className={`${classLi} lg:row-span-2 lg:self-center`}>
+              <li
+                key={item.id}
+                className={`${classLi} lg:row-span-2 lg:self-center tilt-in-bottom-1`}
+              >
                 <span className={classSpan}>{item.text}</span>
               </li>
             );
           } else {
             return (
-              <li className={`${classLi}`} key={item.id}>
+              <li className={`${classLi} tilt-in-top-2`} key={item.id}>
                 <span className={classSpan}>{item.text}</span>
               </li>
             );

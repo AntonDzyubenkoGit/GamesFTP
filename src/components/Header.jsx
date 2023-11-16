@@ -30,7 +30,7 @@ const Header = () => {
         <NavLink
           to="/games-list"
           className={({ isActive }) =>
-            isActive ? 'font-bold underline order-2 md:order-1' : 'order-2 lg:order-1'
+            isActive ? 'font-bold underline order-2 md:order-1' : 'order-2 md:order-1'
           }
         >
           Список игр
