@@ -1,10 +1,11 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Context from './hooks/Context';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import GamesListPage from './pages/GamesListPage';
 import FavoriteGamesPage from './pages/FavoriteGamesPage';
+import CategoryPage from './pages/CategoryPage';
 
 const App = () => {
   return (
@@ -14,8 +15,8 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="games-list" element={<GamesListPage />} />
           <Route path="favorite" element={<FavoriteGamesPage />} />
-          <Route path=":category" />
-          <Route path="*" element={<HomePage />} />
+          <Route path=":category" element={<CategoryPage />} />
+          <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>
     </Context>

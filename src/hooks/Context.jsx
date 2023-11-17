@@ -1,27 +1,39 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { API_KEY } from '../config';
 
 export const AppContext = createContext();
 
 const Context = (props) => {
   const [count, setCount] = useState(0);
-
-  const [games, setGames] = useState([
+  const [loading, setLoading] = useState(true);
+  const [favoriteGames, setFavoriteGames] = useState([
     // { id: 1, title: 'First ' },
     // { id: 2, title: 'Second ' },
     // { id: 3, title: 'Third ' },
   ]);
 
+  useEffect(() => {
+    setCount(favoriteGames.length);
+  }, [favoriteGames]);
+
   const addGame = (game) => {
-    setGames([game, ...games]);
-    setCount(games.length);
+    setFavoriteGames([game, ...favoriteGames]);
   };
 
   const removeGame = (id) => {
-    setGames(games.filter((game) => game.id !== id));
-    setCount(games.length);
+    setFavoriteGames(favoriteGames.filter((game) => game.id !== id));
   };
 
-  const value = { count: count, games, addGame, removeGame };
+  const value = {
+    count: count,
+    favoriteGames,
+    setFavoriteGames,
+    addGame,
+    removeGame,
+    API_KEY,
+    loading,
+    setLoading,
+  };
 
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;
 };
