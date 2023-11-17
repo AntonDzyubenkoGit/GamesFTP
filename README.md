@@ -17,3 +17,4 @@
 - Tailwind
 - Vite
 - Eslint
+- Animate On Scroll Library (AOS)

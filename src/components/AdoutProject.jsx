@@ -4,7 +4,7 @@ import Decor from './Decor';
 
 const AdoutProject = () => {
   const classLi =
-    'relative max-lg:justify-self-center text-sm lg:text-base text-center before:absolute before: before:w-[248px] before:h-[248px] before:rounded-full before:border before:border-primary before:bg-background-hf before:inset-0';
+    'relative max-lg:justify-self-center text-sm lg:text-base text-center before:absolute before:w-[248px] before:h-[248px] before:rounded-full before:border before:border-primary before:bg-background-hf before:inset-0';
   const classSpan =
     'w-[240px] h-[240px] flex items-center justify-center bg-light rounded-full border border-primary relative  inset-1 px-[10px]';
 
@@ -12,7 +12,7 @@ const AdoutProject = () => {
     <div
       className="
         bg-hero bg-no-repeat bg-center bg-cover
-      text-primary font-regular "
+      text-primary font-regular"
     >
       <h1
         className="
