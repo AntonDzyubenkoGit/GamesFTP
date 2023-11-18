@@ -22,7 +22,7 @@ const CategoryCard = ({ id, category, title, coverImage }) => {
           block text-center 
         bg-light border border-primary 
           rounded-md relative inset-1"
-        to={category}
+        to={`/category/${category}`}
       >
         <div className="overflow-hidden">
           <img

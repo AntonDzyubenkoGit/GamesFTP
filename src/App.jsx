@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import GamesListPage from './pages/GamesListPage';
 import FavoriteGamesPage from './pages/FavoriteGamesPage';
 import CategoryPage from './pages/CategoryPage';
+import GamePage from './pages/GamePage';
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
           <Route index element={<HomePage />} />
           <Route path="games-list" element={<GamesListPage />} />
           <Route path="favorite" element={<FavoriteGamesPage />} />
-          <Route path=":category" element={<CategoryPage />} />
+          <Route path="category/:category" element={<CategoryPage />} />
+          <Route path="game/:id" element={<GamePage />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Route>
       </Routes>

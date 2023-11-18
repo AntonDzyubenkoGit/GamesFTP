@@ -30,13 +30,15 @@ const Header = () => {
         <NavLink
           to="/games-list"
           className={({ isActive }) =>
-            isActive ? 'font-bold underline order-2 md:order-1' : 'order-2 md:order-1'
+            isActive
+              ? 'font-bold underline order-2 md:order-1 whitespace-nowrap'
+              : 'order-2 md:order-1 whitespace-nowrap'
           }
         >
           Список игр
         </NavLink>
         <Link to="/" className="order-1 lg:order-2">
-          <img src={logo} alt="logo" className="w-[90px] h-[90px] lg:w-[110px] lg:h-[110px]" />
+          <img src={logo} alt="logo" className="w-[90px] h-[90px] md:w-[110px] md:h-[110px]" />
         </Link>
         <NavLink
           to="/favorite"

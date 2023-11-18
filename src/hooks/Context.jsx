@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { API_KEY } from '../config';
+import { API_KEY, API_URL } from '../config';
 
 export const AppContext = createContext();
 
@@ -31,6 +31,7 @@ const Context = (props) => {
     addGame,
     removeGame,
     API_KEY,
+    API_URL,
     loading,
     setLoading,
   };
