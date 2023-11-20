@@ -23,7 +23,8 @@ export default {
         light: '#F0F0F0',
         background: '#E5DBFF',
         'background-hf': '#DEDEDE',
-        pink: '#F0C5FF'
+        pink: '#F0C5FF',
+        system: '#848484'
       },
       boxShadow: {
         card: '2px 4px 4px #505050',

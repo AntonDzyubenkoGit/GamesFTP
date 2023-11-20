@@ -5,6 +5,7 @@ import { categoryGames } from '../constants/constants';
 import Loader from '../components/Loader';
 import GameCard from '../components/GameCard';
 import BtnBack from '../components/BtnBack';
+import Decor from '../components/Decor';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -44,30 +45,33 @@ const CategoryPage = () => {
   }, [dataGames, setLoading]);
 
   return (
-    <div className="max-container px-4 xl:px-[120px] text-primary font-regular">
-      <BtnBack returnBack={returnBack} />
-      <h1
-        className="text-center font-bold text-lg 
+    <>
+      <div className="max-container px-4 xl:px-[120px] mb-[30px] md:mb-[65px] text-primary font-regular">
+        <BtnBack returnBack={returnBack} />
+        <h1
+          className="text-center font-bold text-lg 
           md:text-xl pt-[30px] md:pt-[65px]"
-      >
-        {pageTitle}
-      </h1>
+        >
+          {pageTitle}
+        </h1>
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <ul
-          className="
+        {loading ? (
+          <Loader />
+        ) : (
+          <ul
+            className="
             grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
             gap-6 xl:gap-y-[50px] xl:gap-x-[50px]
             py-6 md:py-[50px]"
-        >
-          {dataGames.map((game) => {
-            return <GameCard key={game.id} {...game} dataGames={dataGames} />;
-          })}
-        </ul>
-      )}
-    </div>
+          >
+            {dataGames.map((game) => {
+              return <GameCard key={game.id} {...game} dataGames={dataGames} />;
+            })}
+          </ul>
+        )}
+      </div>
+      <Decor />
+    </>
   );
 };
 
