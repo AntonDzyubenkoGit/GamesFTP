@@ -24,6 +24,8 @@ export default {
         background: '#E5DBFF',
         'background-hf': '#DEDEDE',
         pink: '#F0C5FF',
+        play: '#B0D9FF',
+        favorite: '#C4FFB0',
         system: '#848484'
       },
       boxShadow: {

@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import Aos from 'aos';
 import 'aos/dist/aos.css';
+import BtnPlay from './BtnPlay';
+import BtnFavorite from './BtnFavorite';
+import BtnProfile from './BtnProfile';
 
 const AboutGame = (dataGame) => {
   const {
@@ -21,6 +24,7 @@ const AboutGame = (dataGame) => {
     screenshots = [],
     thumbnail = '',
     game_url = '',
+    freetogame_profile_url = '',
   } = dataGame;
 
   useEffect(() => {
@@ -107,9 +111,7 @@ const AboutGame = (dataGame) => {
           screenshots.map((item) => {
             return (
               <div
-                className="
-                  justify-self-center 
-                  h-[180px] border  border-primary"
+                className="justify-self-center h-[180px] border  border-primary"
                 key={item.id}
                 data-aos="zoom-in"
               >
@@ -118,9 +120,14 @@ const AboutGame = (dataGame) => {
             );
           })}
       </div>
-      <a href={game_url} target="_blank" rel="noreferrer">
-        <button>Играть сейчас</button>
-      </a>
+      <div
+        className="flex items-center justify-center flex-wrap gap-4 md:gap-[80px] mt-6 md:mt-[65px]"
+        data-aos="fade-up"
+      >
+        <BtnFavorite dataGame={dataGame} />
+        <BtnPlay game_url={game_url} />
+        <BtnProfile profile_url={freetogame_profile_url} />
+      </div>
     </div>
   );
 };
