@@ -15,6 +15,16 @@ const CategoryPage = () => {
   const [dataGames, setDataGames] = useState([]);
   const [pageTitle, setPageTitle] = useState('');
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(18);
+  const lastGameIndex = currentPage * gamesPerPage;
+  const firstGameIndex = lastGameIndex - gamesPerPage;
+  const [currentGamesData, setCurrentGameData] = useState([]);
+
+  function switchPage(page) {
+    setCurrentPage(page);
+  }
+
   function returnBack() {
     return navigate(-1);
   }
@@ -36,6 +46,7 @@ const CategoryPage = () => {
               .then((response) => response.json())
               .then((data) => {
                 setDataGames(data);
+                setCurrentGameData(data.slice(firstGameIndex, lastGameIndex));
                 setPageTitle(item.title);
                 setLoading(false);
               });
@@ -45,18 +56,8 @@ const CategoryPage = () => {
       getGategoryGames();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [currentPage]
   );
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [gamesPerPage] = useState(18);
-  const lastGameIndex = currentPage * gamesPerPage;
-  const firstGameIndex = lastGameIndex - gamesPerPage;
-  const currentGamesData = [...dataGames].slice(firstGameIndex, lastGameIndex);
-
-  function switchPage(page) {
-    setCurrentPage(page);
-  }
 
   return (
     <>

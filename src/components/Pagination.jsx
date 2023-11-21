@@ -15,7 +15,7 @@ const Pagination = ({ gamesPerPage, totalGames, switchPage, currentPage }) => {
             <button
               className={`${
                 number === currentPage ? 'bg-pink font-bold' : 'bg-play'
-              } px-3 py-1 rounded-tl-xl rounded-br-xl`}
+              } px-3 py-1 rounded-tl-xl rounded-br-xl shadow-button`}
               onClick={() => {
                 switchPage(number);
               }}

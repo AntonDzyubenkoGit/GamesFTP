@@ -12,6 +12,17 @@ const GamesListPage = () => {
   const { API_KEY, API_URL, loading = true, setLoading } = useContext(AppContext);
   const [dataGames, setDataGames] = useState([]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(30);
+  const lastGameIndex = currentPage * gamesPerPage;
+  const firstGameIndex = lastGameIndex - gamesPerPage;
+  // const currentGamesData = [...dataGames].slice(firstGameIndex, lastGameIndex);
+  const [currentGamesData, setCurrentGameData] = useState([]);
+
+  function switchPage(page) {
+    setCurrentPage(page);
+  }
+
   function returnBack() {
     return navigate(-1);
   }
@@ -21,6 +32,7 @@ const GamesListPage = () => {
       async function getGamesList() {
         try {
           setLoading(true);
+
           await fetch(`${API_URL}/games`, {
             method: 'GET',
             headers: {
@@ -31,6 +43,7 @@ const GamesListPage = () => {
             .then((response) => response.json())
             .then((data) => {
               setDataGames(data);
+              setCurrentGameData(data.slice(firstGameIndex, lastGameIndex));
               setLoading(false);
             });
         } catch (error) {
@@ -40,18 +53,8 @@ const GamesListPage = () => {
       getGamesList();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [currentPage]
   );
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [gamesPerPage] = useState(30);
-  const lastGameIndex = currentPage * gamesPerPage;
-  const firstGameIndex = lastGameIndex - gamesPerPage;
-  const currentGamesData = [...dataGames].slice(firstGameIndex, lastGameIndex);
-
-  function switchPage(page) {
-    setCurrentPage(page);
-  }
 
   return (
     <>

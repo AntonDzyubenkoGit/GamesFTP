@@ -6,11 +6,7 @@ export const AppContext = createContext();
 const Context = (props) => {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [favoriteGames, setFavoriteGames] = useState([
-    // { id: 1, title: 'First ' },
-    // { id: 2, title: 'Second ' },
-    // { id: 3, title: 'Third ' },
-  ]);
+  const [favoriteGames, setFavoriteGames] = useState([]);
 
   useEffect(() => {
     setCount(favoriteGames.length);
