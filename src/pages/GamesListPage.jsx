@@ -1,7 +1,74 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../hooks/Context';
+import Loader from '../components/Loader';
+import GameCard from '../components/GameCard';
+import BtnBack from '../components/BtnBack';
+import Decor from '../components/Decor';
 
 const GamesListPage = () => {
-  return <div>GamesListPage</div>;
+  const navigate = useNavigate();
+  const { API_KEY, API_URL, loading = true, setLoading } = useContext(AppContext);
+  const [dataGames, setDataGames] = useState([]);
+
+  function returnBack() {
+    return navigate(-1);
+  }
+
+  useEffect(
+    function getGategoryGames() {
+      try {
+        fetch(`${API_URL}/games`, {
+          method: 'GET',
+          headers: {
+            'X-RapidAPI-Key': API_KEY,
+            'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setDataGames(data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  useEffect(() => {
+    dataGames.length > 0 ? setLoading(false) : setLoading(true);
+  }, [dataGames, setLoading]);
+
+  return (
+    <>
+      <div className="max-container px-4 xl:px-[120px] mb-[30px] md:mb-[65px] text-primary font-regular">
+        <BtnBack returnBack={returnBack} />
+        <h1
+          className="text-center font-bold text-lg 
+          md:text-xl pt-[30px] md:pt-[65px]"
+        >
+          Список игр
+        </h1>
+        {loading ? (
+          <Loader />
+        ) : (
+          <ul
+            className="
+            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+            gap-6 xl:gap-y-[50px] xl:gap-x-[50px]
+            py-6 md:py-[50px]"
+          >
+            {dataGames.map((game) => {
+              return <GameCard key={game.id} {...game} dataGames={dataGames} />;
+            })}
+          </ul>
+        )}
+      </div>
+      <Decor />
+    </>
+  );
 };
 
 export default GamesListPage;
