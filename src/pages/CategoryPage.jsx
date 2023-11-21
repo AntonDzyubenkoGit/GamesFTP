@@ -6,6 +6,7 @@ import Loader from '../components/Loader';
 import GameCard from '../components/GameCard';
 import BtnBack from '../components/BtnBack';
 import Decor from '../components/Decor';
+import Pagination from '../components/Pagination';
 
 const CategoryPage = () => {
   const { category } = useParams();
@@ -19,30 +20,43 @@ const CategoryPage = () => {
   }
 
   useEffect(
-    function getGategoryGames() {
-      for (let item of categoryGames) {
-        if (item.category === category) {
-          fetch(`${API_URL}/games?category=${category}`, {
-            headers: {
-              'X-RapidAPI-Key': API_KEY,
-              'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              setDataGames(data);
-              setPageTitle(item.title);
-            });
+    () => {
+      async function getGategoryGames() {
+        for (let item of categoryGames) {
+          if (item.category === category) {
+            setLoading(true);
+
+            await fetch(`${API_URL}/games?category=${category}`, {
+              method: 'GET',
+              headers: {
+                'X-RapidAPI-Key': API_KEY,
+                'X-RapidAPI-Host': 'free-to-play-games-database.p.rapidapi.com',
+              },
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                setDataGames(data);
+                setPageTitle(item.title);
+                setLoading(false);
+              });
+          }
         }
       }
+      getGategoryGames();
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
-  useEffect(() => {
-    dataGames.length > 0 ? setLoading(false) : setLoading(true);
-  }, [dataGames, setLoading]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [gamesPerPage] = useState(18);
+  const lastGameIndex = currentPage * gamesPerPage;
+  const firstGameIndex = lastGameIndex - gamesPerPage;
+  const currentGamesData = [...dataGames].slice(firstGameIndex, lastGameIndex);
+
+  function switchPage(page) {
+    setCurrentPage(page);
+  }
 
   return (
     <>
@@ -54,20 +68,29 @@ const CategoryPage = () => {
         >
           {pageTitle}
         </h1>
-
         {loading ? (
           <Loader />
         ) : (
-          <ul
-            className="
+          <>
+            <ul
+              className="
             grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
             gap-6 xl:gap-y-[50px] xl:gap-x-[50px]
             py-6 md:py-[50px]"
-          >
-            {dataGames.map((game) => {
-              return <GameCard key={game.id} {...game} dataGames={dataGames} />;
-            })}
-          </ul>
+            >
+              {currentGamesData.map((game) => {
+                return <GameCard key={game.id} {...game} dataGames={currentGamesData} />;
+              })}
+            </ul>
+            {dataGames.length > gamesPerPage ? (
+              <Pagination
+                gamesPerPage={gamesPerPage}
+                totalGames={dataGames.length}
+                switchPage={switchPage}
+                currentPage={currentPage}
+              />
+            ) : null}
+          </>
         )}
       </div>
       <Decor />
