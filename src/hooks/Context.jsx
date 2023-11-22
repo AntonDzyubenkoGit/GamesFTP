@@ -9,15 +9,32 @@ const Context = (props) => {
   const [favoriteGames, setFavoriteGames] = useState([]);
 
   useEffect(() => {
+    if (!localStorage.favorite) {
+      localStorage.setItem('favorite', '[]');
+    } else {
+      setFavoriteGames(JSON.parse(localStorage.getItem('favorite')));
+    }
+  }, []);
+
+  useEffect(() => {
     setCount(favoriteGames.length);
   }, [favoriteGames]);
 
   const addGame = (game) => {
-    setFavoriteGames([game, ...favoriteGames]);
+    if (!favoriteGames.some((item) => item.id === game.id)) {
+      setFavoriteGames([game, ...favoriteGames]);
+      localStorage.setItem(
+        'favorite',
+        JSON.stringify([game, ...JSON.parse(localStorage.getItem('favorite'))])
+      );
+    }
   };
 
   const removeGame = (id) => {
     setFavoriteGames(favoriteGames.filter((game) => game.id !== id));
+
+    const storage = JSON.parse(localStorage.getItem('favorite')).filter((item) => item.id !== id);
+    localStorage.setItem('favorite', JSON.stringify(storage));
   };
 
   const value = {
