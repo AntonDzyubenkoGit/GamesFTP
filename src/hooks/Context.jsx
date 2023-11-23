@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { API_KEY, API_URL } from '../config';
+import { useSearchParams } from 'react-router-dom';
 
 export const AppContext = createContext();
 
@@ -7,6 +8,7 @@ const Context = (props) => {
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [favoriteGames, setFavoriteGames] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if (!localStorage.favorite) {
@@ -37,6 +39,14 @@ const Context = (props) => {
     localStorage.setItem('favorite', JSON.stringify(storage));
   };
 
+  function titleSearch(e) {
+    e.preventDefault();
+    const form = e.target;
+
+    const query = form.titleSearch.value;
+    setSearchParams({ title: query });
+  }
+
   const value = {
     count: count,
     favoriteGames,
@@ -47,6 +57,9 @@ const Context = (props) => {
     API_URL,
     loading,
     setLoading,
+    searchParams,
+    setSearchParams,
+    titleSearch,
   };
 
   return <AppContext.Provider value={value}>{props.children}</AppContext.Provider>;

@@ -7,11 +7,19 @@ import GameCard from '../components/GameCard';
 import BtnBack from '../components/BtnBack';
 import Decor from '../components/Decor';
 import Pagination from '../components/Pagination';
+import SearchForm from '../components/SearchForm';
 
 const CategoryPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
-  const { API_KEY, API_URL, loading = true, setLoading } = useContext(AppContext);
+  const {
+    API_KEY,
+    API_URL,
+    loading = true,
+    setLoading,
+    searchParams,
+    titleSearch,
+  } = useContext(AppContext);
   const [dataGames, setDataGames] = useState([]);
   const [pageTitle, setPageTitle] = useState('');
 
@@ -20,6 +28,8 @@ const CategoryPage = () => {
   const lastGameIndex = currentPage * gamesPerPage;
   const firstGameIndex = lastGameIndex - gamesPerPage;
   const [currentGamesData, setCurrentGameData] = useState([]);
+
+  const titleQuery = searchParams.get('title') || '';
 
   function switchPage(page) {
     setCurrentPage(page);
@@ -73,17 +83,31 @@ const CategoryPage = () => {
           <Loader />
         ) : (
           <>
+            <div
+              className="
+                flex items-center gap-x-10 gap-y-2 
+                max-md:flex max-md:flex-col mt-5"
+            >
+              <h3 className="font-bold text-base md:text-[24px]">Поиск: </h3>
+              <SearchForm titleSearch={titleSearch} titleQuery={titleQuery} />
+            </div>
             <ul
               className="
-            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-            gap-6 xl:gap-y-[50px] xl:gap-x-[50px]
-            py-6 md:py-[50px]"
+                grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
+                gap-6 xl:gap-y-[50px] xl:gap-x-[50px]
+                py-6 md:py-[50px]"
             >
-              {currentGamesData.map((game) => {
-                return <GameCard key={game.id} {...game} dataGames={currentGamesData} />;
-              })}
+              {!titleQuery
+                ? currentGamesData.map((game) => {
+                    return <GameCard key={game.id} {...game} dataGames={currentGamesData} />;
+                  })
+                : dataGames
+                    .filter((game) => game.title.toLowerCase().includes(titleQuery.toLowerCase()))
+                    .map((game) => {
+                      return <GameCard key={game.id} {...game} dataGames={dataGames} />;
+                    })}
             </ul>
-            {dataGames.length > gamesPerPage ? (
+            {!titleQuery && dataGames.length > gamesPerPage ? (
               <Pagination
                 gamesPerPage={gamesPerPage}
                 totalGames={dataGames.length}
